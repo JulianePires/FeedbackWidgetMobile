@@ -29,6 +29,10 @@ function Widget() {
     setFeedbackType(feedbackType);
   }
 
+  function handleChangeFeedbackSent() {
+    setWasFeedbackSent(true);
+  }
+
   function handleResetWidget() {
     setFeedbackType(null);
     setWasFeedbackSent(false);
@@ -49,11 +53,16 @@ function Widget() {
         snapPoints={[1, 280]}
         backgroundStyle={styles.modal}
         handleIndicatorStyle={styles.indicator}
+        keyboardBehavior="interactive"
       >
         {wasFeedbackSent ? (
           <Success onResetWidget={handleResetWidget} />
         ) : feedbackType ? (
-          <Form feedbackType={feedbackType} onLeftForm={handleResetWidget} />
+          <Form
+            feedbackType={feedbackType}
+            onLeftForm={handleResetWidget}
+            onFeedbackSent={handleChangeFeedbackSent}
+          />
         ) : (
           <Options onChangeFeedbackType={handleChangeFeedbackType} />
         )}

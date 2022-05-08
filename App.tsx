@@ -4,6 +4,7 @@ import "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
 import { View } from "react-native";
 import AppLoading from "expo-app-loading";
+import * as SplashScreen from "expo-splash-screen";
 
 import {
   useFonts,
@@ -13,8 +14,10 @@ import {
 
 import Widget from "./src/components/Widget";
 import { theme } from "./src/theme";
+import { DissmissKeyboard } from "./src/components/DissmissKeyboard";
 
 export default function App() {
+  SplashScreen.hideAsync();
   const [fontsLoaded] = useFonts({
     Inter_400Regular,
     Inter_500Medium,
@@ -25,14 +28,16 @@ export default function App() {
   }
 
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: theme.colors.background,
-      }}
-    >
-      <StatusBar style="light" backgroundColor="transparent" translucent />
-      <Widget />
-    </View>
+    <DissmissKeyboard>
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: theme.colors.background,
+        }}
+      >
+        <StatusBar style="light" backgroundColor="transparent" translucent />
+        <Widget />
+      </View>
+    </DissmissKeyboard>
   );
 }
